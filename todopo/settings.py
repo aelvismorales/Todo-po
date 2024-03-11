@@ -38,7 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "usuarios",
+    "tailwind",  # tailwindcss package installation guide
+    "theme",  # tailwindcss package installation guide
+    "django_browser_reload",
 ]
+
+TAILWIND_APP_NAME = "theme"  # tailwindcss package installation guide
+
+INTERNAL_IPS = [
+    "127.0.0.1"
+]  # For django-debug-toolbar, and included for the tailwindcss package installation guide
+
+NPM_BIN_PATH = "/usr/bin/npm"  # tailwindcss package installation guide, this route was for the way that I installed the npm package
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -48,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "todopo.urls"
