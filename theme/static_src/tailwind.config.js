@@ -42,7 +42,38 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'torch-red': {
+                    '50': '#fef2f3',
+                    '100': '#fee2e3',
+                    '200': '#fecacc',
+                    '300': '#fca5a9',
+                    '400': '#f87177',
+                    '500': '#ed333b',
+                    '600': '#dc262e',
+                    '700': '#b91c23',
+                    '800': '#991b20',
+                    '900': '#7f1d21',
+                    '950': '#450a0d',
+                },
+                'black-ui': {
+                    '50': '#f6f6f6',
+                    '100': '#e7e7e7',
+                    '200': '#d1d1d1',
+                    '300': '#b0b0b0',
+                    '400': '#888888',
+                    '500': '#6d6d6d',
+                    '600': '#5d5d5d',
+                    '700': '#4f4f4f',
+                    '800': '#454545',
+                    '900': '#3d3d3d',
+                    '950': '#000000',
+                },
+                
+            }
+        },
+
     },
     plugins: [
         /**
@@ -54,4 +85,5 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
     ],
+    darkMode: 'class',
 }

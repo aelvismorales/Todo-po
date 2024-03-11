@@ -1,19 +1,23 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Django Tailwind</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <title>Todopo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% tailwind_css %}
-</head>
+  </head>
 
-<body>
-    {% block content %}
-    {% endblock %}
-
-</body>
-
+  <body>
+    <label for="darkmode"> Dark Mode</label>
+    <input type="checkbox" id="darkmode" />
+    {% block content %} {% endblock %}
+  </body>
+  <script>
+    const darkmode = document.getElementById("darkmode");
+    darkmode.addEventListener("change", () => {
+      document.body.classList.toggle("dark");
+    });
+  </script>
 </html>
