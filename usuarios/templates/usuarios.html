@@ -1,11 +1,7 @@
-{% extends 'base_usuarios.html' %}
-
-{% block content %}
-
-{% for usuario in usuarios%}
-
-<h1>{{ usuario.username }}</h1>
-
-{% endfor %}
-
+{% extends 'base_usuarios.html' %} {% block content %}
+<div>
+  {% for usuario in usuarios %}
+  <h1>{{ usuario.username }}</h1>
+  {% endfor %}
+</div>
 {% endblock %}

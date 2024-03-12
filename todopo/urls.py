@@ -17,9 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from usuarios.views import login_usuario
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", login_usuario),
     path("usuarios/", include("usuarios.urls")),
+    path("tasks/", include("tasks.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

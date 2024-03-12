@@ -14,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
         max_length=150,
         widget=forms.TextInput(
             attrs={
-                "class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:border-torch-red-200 focus:ring-torch-red-200 focus:ring-opacity-50 dark:focus:ring-torch-red-400 dark:focus:ring-opacity-70",
+                "class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:ring-torch-red-300  dark:focus:ring-torch-red-400",
             }
         ),
         required=True,
@@ -23,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
         label="Contraseña",
         widget=forms.PasswordInput(
             attrs={
-                "class": "mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:border-torch-red-200 focus:ring-torch-red-200 focus:ring-opacity-50 dark:focus:ring-torch-red-400 dark:focus:ring-opacity-70"
+                "class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:ring-torch-red-300  dark:focus:ring-torch-red-400"
             }
         ),
         required=True,
@@ -32,7 +32,7 @@ class CustomUserCreationForm(UserCreationForm):
         label="Confirmar contraseña",
         widget=forms.PasswordInput(
             attrs={
-                "class": "mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:border-torch-red-200 focus:ring-torch-red-200 focus:ring-opacity-50 dark:focus:ring-torch-red-400 dark:focus:ring-opacity-70"
+                "class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:ring-torch-red-300  dark:focus:ring-torch-red-400"
             }
         ),
         required=True,

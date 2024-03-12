@@ -71,7 +71,10 @@ module.exports = {
                     '950': '#000000',
                 },
                 
-            }
+            },
+            fontFamily: {
+                'inter': ['Inter', 'sans-serif'],
+            },
         },
 
     },

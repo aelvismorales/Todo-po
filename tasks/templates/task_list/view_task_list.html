@@ -1,0 +1,326 @@
+{% extends 'base_usuarios.html' %}
+{% block content %}
+<main class="w-screen h-screen bg-white dark:bg-black-ui-900 overflow-y-auto">
+    <section class="p-4 flex flex-col gap-2 sm:gap-0 sm:justify-between sm:flex-row text-black dark:text-white">
+        <h1 class="font-sans font-semibold text-3xl ">Lista de Tareas</h1>
+        <button id="btn-crear-task-list" type="button"
+                class="font-inter font-normal text-center py-2 px-4 rounded-md bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700 w-32 sm:w-fit">Crear
+            Lista</button>
+    </section>
+
+    <section class="px-4 dark:text-gray-100">
+        <article class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative">
+            <div class="absolute w-1.5 top-0 bottom-0 left-0 bg-torch-red-600"></div>
+            <div class="flex flex-col gap-2 sm:justify-between sm:flex-row sm:gap-0">
+                <header>
+                    <h1 class="text-torch-red-950 text-base">Tareas Pendientes</h1>
+                    <p class="text-torch-red-900 text-xs"> <strong>Created:</strong> 10/05/2024</p>
+                    <p class="text-torch-red-900 text-xs"><strong>Total Tasks:</strong> 10</p>
+                </header>
+                <!--Buttons to create new task inside or delete the list itself-->
+                <section class="flex items-center gap-1">
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-green-500 active:text-green-600 dark:hover:text-green-500 dark:active:text-green-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6" />
+                        </svg>
+                    </button>
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-torch-red-500 active:text-torch-red-600 dark:hover:text-torch-red-500 dark:hover:active:text-torch-red-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                        </svg>
+
+                    </button>
+                </section>
+            </div>
+            <!--Description of the list-->
+            <section class="py-1">
+                <p id="description-list" class="text-gray-700 py-2 border-t-2 border-torch-red-400">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Nihil
+                    consequatur
+                    repudiandae similique quibusdam et
+                    exercitationem voluptatum sapiente illo ab nostrum quo esse voluptate libero pariatur fugiat cumque dolores, adipisci praesentium
+                    veniam blanditiis magnam fuga sed illum. Ex, architecto labore, voluptatum similique odio porro blanditiis aperiam laudantium
+                    autem, dolores esse quidem.</p>
+            </section>
+        </article>
+        <article class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative">
+            <div class="absolute w-1.5 top-0 bottom-0 left-0 bg-torch-red-600"></div>
+            <div class="flex flex-col gap-2 sm:justify-between sm:flex-row sm:gap-0">
+                <header>
+                    <h1 class="text-torch-red-950 text-base">Tareas Pendientes</h1>
+                    <p class="text-torch-red-900 text-xs"> <strong>Created:</strong> 10/05/2024</p>
+                    <p class="text-torch-red-900 text-xs"><strong>Total Tasks:</strong> 10</p>
+                </header>
+                <!--Buttons to create new task inside or delete the list itself-->
+                <section class="flex items-center gap-1">
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-green-500 dark:hover:text-green-500 dark:active:text-green-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6" />
+                        </svg>
+                    </button>
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-torch-red-500 active:text-torch-red-600 dark:hover:text-torch-red-500 dark:hover:active:text-torch-red-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                        </svg>
+                    </button>
+                </section>
+            </div>
+            <!--Description of the list-->
+            <section class="py-1">
+                <p id="description-list" class="text-gray-700 py-2 border-t-2 border-torch-red-400">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Nihil
+                    consequatur
+                    repudiandae similique quibusdam et
+                    exercitationem voluptatum sapiente illo ab nostrum quo esse voluptate libero pariatur fugiat cumque dolores, adipisci praesentium
+                    veniam blanditiis magnam fuga sed illum. Ex, architecto labore, voluptatum similique odio porro blanditiis aperiam laudantium
+                    autem, dolores esse quidem.</p>
+            </section>
+        </article>
+        <article class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative">
+            <div class="absolute w-1.5 top-0 bottom-0 left-0 bg-torch-red-600"></div>
+            <div class="flex flex-col gap-2 sm:justify-between sm:flex-row sm:gap-0">
+                <header>
+                    <h1 class="text-torch-red-950 text-base">Tareas Pendientes</h1>
+                    <p class="text-torch-red-900 text-xs"> <strong>Created:</strong> 10/05/2024</p>
+                    <p class="text-torch-red-900 text-xs"><strong>Total Tasks:</strong> 10</p>
+                </header>
+                <!--Buttons to create new task inside or delete the list itself-->
+                <section class="flex items-center gap-1">
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-green-500 dark:hover:text-green-500 dark:active:text-green-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6" />
+                        </svg>
+                    </button>
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-black-ui-900 hover:text-torch-red-500 active:text-torch-red-600 dark:hover:text-torch-red-500 dark:hover:active:text-torch-red-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                        </svg>
+                    </button>
+                </section>
+            </div>
+            <!--Description of the list-->
+            <section class="py-1">
+                <p id="description-list" class="text-gray-700 py-2 border-t-2 border-torch-red-400">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Nihil
+                    consequatur
+                    repudiandae similique quibusdam et
+                    exercitationem voluptatum sapiente illo ab nostrum quo esse voluptate libero pariatur fugiat cumque dolores, adipisci praesentium
+                    veniam blanditiis magnam fuga sed illum. Ex, architecto labore, voluptatum similique odio porro blanditiis aperiam laudantium
+                    autem, dolores esse quidem.</p>
+            </section>
+        </article>
+        <article class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative">
+            <div class="absolute w-1.5 top-0 bottom-0 left-0 bg-torch-red-600"></div>
+            <div class="flex flex-col gap-2 sm:justify-between sm:flex-row sm:gap-0">
+                <header>
+                    <h1 class="text-torch-red-950 text-base">Tareas Pendientes</h1>
+                    <p class="text-torch-red-900 text-xs"> <strong>Created:</strong> 10/05/2024</p>
+                    <p class="text-torch-red-900 text-xs"><strong>Total Tasks:</strong> 10</p>
+                </header>
+                <!--Buttons to create new task inside or delete the list itself-->
+                <section class="flex items-center gap-1">
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-green-500 dark:hover:text-green-500 dark:active:text-green-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6" />
+                        </svg>
+                    </button>
+                    <button type="button"
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                        <svg
+                             class="w-6 h-6 text-gray-800  hover:text-torch-red-500 active:text-torch-red-600 dark:hover:text-torch-red-500 dark:hover:active:text-torch-red-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                        </svg>
+                    </button>
+                </section>
+            </div>
+            <!--Description of the list-->
+            <section class="py-1">
+                <p id="description-list" class="text-gray-700 py-2 border-t-2 border-torch-red-400">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Nihil
+                    consequatur
+                    repudiandae similique quibusdam et
+                    exercitationem voluptatum sapiente illo ab nostrum quo esse voluptate libero pariatur fugiat cumque dolores, adipisci praesentium
+                    veniam blanditiis magnam fuga sed illum. Ex, architecto labore, voluptatum similique odio porro blanditiis aperiam laudantium
+                    autem, dolores esse quidem.</p>
+            </section>
+        </article>
+
+    </section>
+</main>
+<!--Modal create Task_List-->
+<div id="create-task-list-modal" tabindex="-1" aria-hidden="true"
+     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40">
+    <div class="relative p-4 w-full max-w-2xl max-h-full mx-auto">
+        <!--Modal content-->
+        <div class="relative bg-white rounded-lg dark:bg-gray-700">
+            <!--Modal Header-->
+            <div class="flex items-center justify-between p-4 sm:p-5 border-b rounded-t dark:border-gray-600">
+                <h1 class="text-xl font-semibold text-gray-900 dark:text-white">New Task List</h1>
+                <button id="btn-close-svg" type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body-->
+            <div class="p-4 sm:p-5 space-y-4">
+                <form action="{% url 'create_task_list'%}" method="post" id="crear_task_list_form">
+                    {% csrf_token %}
+                    {% for field in create_task_list_form %}
+                    <label for="{{field.id_for_label}}" class="block mb-2">
+                        <span class="text-gray-700 dark:text-gray-50">{{field.label}}</span>
+                        {{field}}
+                        {% if field.errors %}
+                        <ul>
+                            {% for error in field.errors %}
+                            <li class="text-red-500">{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </label>
+                    {% endfor %}
+                </form>
+            </div>
+            <!--Modal Footer-->
+            <div class="flex items-center p-4 sm:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button id="btn-save" type="submit" for="crear_task_list_form"
+                        class="text-white bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700 focus:ring-4 focus:outline-none focus:ring-torch-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-torch-red-500 dark:hover:bg-torch-red-600 dark:active:bg-torch-red-700">Save</button>
+                <button id="btn-footer-close" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-torch-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Script para poner un maximo de palabra visible-->
+<script>
+    let descriptionLists = document.querySelectorAll('#description-list');
+
+    function truncateDescription() {
+        descriptionLists.forEach((descriptionList) => {
+            // Check if the full text is already stored
+            if (!descriptionList.getAttribute('data-full-text')) {
+                descriptionList.setAttribute('data-full-text', descriptionList.innerText);
+            }
+
+            let description = descriptionList.getAttribute('data-full-text');
+            let maxLength;
+            if (window.innerWidth <= 640) {
+                maxLength = 150;
+            } else {
+                maxLength = 250;
+            }
+
+            let shortDescription = description.substring(0, maxLength);
+
+            if (description.length > maxLength) {
+                descriptionList.innerText = shortDescription + '...';
+            }
+        });
+    }
+    // Call the function once when the page loads
+    truncateDescription();
+
+    // Call the function again whenever the window is resized
+    window.addEventListener('resize', truncateDescription);
+</script>
+
+<!--Script abrir modal crear_task_list-->
+<script>
+    const modal_crear = document.getElementById('create-task-list-modal');
+    const btn_crear = document.getElementById('btn-crear-task-list');
+
+    const modal_close_svg = document.getElementById('btn-close-svg');
+    const modal_close_btn = document.getElementById('btn-footer-close');
+
+    btn_crear.addEventListener('click', () => {
+        modal_crear.classList.remove('hidden');
+        modal_crear.classList.add('block');
+        modal_crear.setAttribute('aria-hidden', 'false');
+    });
+
+    modal_close_svg.addEventListener('click', () => {
+        modal_crear.classList.remove('block');
+        modal_crear.classList.add('hidden');
+        modal_crear.setAttribute('aria-hidden', 'true');
+    });
+
+    modal_close_btn.addEventListener('click', () => {
+        modal_crear.classList.remove('block');
+        modal_crear.classList.add('hidden');
+        modal_crear.setAttribute('aria-hidden', 'true');
+    });
+
+    window.onclick = function (event) {
+        if (event.target === modal_crear) {
+            modal_crear.classList.remove('block');
+            modal_crear.classList.add('hidden');
+            modal_crear.setAttribute('aria-hidden', 'true');
+        }
+    };
+</script>
+
+<!--Script para guardar(enviar) el formulario-->
+<script>
+    // Get the form element
+    const form = document.getElementById('crear_task_list_form');
+
+    // Get the "Save" button element
+    const saveButton = document.getElementById('btn-save');
+
+    // Add click event listener to the "Save" button
+    saveButton.addEventListener('click', function () {
+        // Submit the form
+        form.submit();
+        // clean the form
+        form.reset();
+    });
+</script>
+
+{% endblock %}
