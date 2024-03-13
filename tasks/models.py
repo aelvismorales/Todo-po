@@ -17,6 +17,20 @@ class TaskList(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def total_tasks(self):
+        """Return the total of tasks in the list"""
+        total = self.task_set.count() if self.task_set.count() else 0
+        return total
+
+    def completed_tasks(self):
+        """Return the total of completed tasks in the list"""
+        total = (
+            self.task_set.filter(completed=True).count()
+            if self.task_set.filter(completed=True).count()
+            else 0
+        )
+        return total
+
 
 class Task(models.Model):
     """Modelo de la tarea"""

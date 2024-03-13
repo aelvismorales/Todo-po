@@ -1,3 +1,4 @@
+{% load static %}
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon" />
   {% tailwind_css %}
 </head>
 
@@ -144,18 +146,20 @@
   const alertdiv = document.getElementById("alert-3");
   const alertdiv2 = document.getElementById("alert-2");
   const alertdiv4 = document.getElementById("alert-4");
+  if (closseButton) {
+    closseButton.addEventListener("click", () => {
+      if (alertdiv) {
+        alertdiv.remove();
+      }
+      if (alertdiv2) {
+        alertdiv2.remove();
+      }
+      if (alertdiv4) {
+        alertdiv4.remove();
+      }
+    });
+  }
 
-  closseButton.addEventListener("click", () => {
-    if (alertdiv) {
-      alertdiv.remove();
-    }
-    if (alertdiv2) {
-      alertdiv2.remove();
-    }
-    if (alertdiv4) {
-      alertdiv4.remove();
-    }
-  });
 </script>
 {% block scripts %}
 {% endblock %}

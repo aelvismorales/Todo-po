@@ -1,21 +1,17 @@
 {% extends 'base_usuarios.html' %} {% load static %} {% block content %}
 <main
-  class="w-screen h-screen flex justify-center items-center bg-white dark:bg-black-ui-900"
->
+      class="w-screen h-screen flex justify-center items-center bg-white dark:bg-black-darkmode-950">
   <section
-    class="sm:w-11/12 sm:max-w-4xl sm:h-3/4 w-full h-full flex sm:flex-row flex-col items-center justify-center"
-  >
+           class="sm:w-11/12 sm:max-w-4xl sm:h-3/4 w-full h-full flex sm:flex-row flex-col items-center justify-center">
     <div class="sm:w-2/5 w-1/4">
       <img src="{% static '/assets/todopo_noche_.webp'%}" alt="logo_todopo" />
     </div>
     <form
-      action="{% url 'registro' %}"
-      method="post"
-      class="sm:w-3/5 w-3/4 sm:mx-4"
-    >
+          action="{% url 'registro' %}"
+          method="post"
+          class="sm:w-3/5 w-3/4 sm:mx-4">
       <h1
-        class="font-sans text-4xl text-center text-black dark:text-white font-bold mt-2 mb-4"
-      >
+          class="font-sans text-4xl text-center text-black dark:text-white font-bold mt-2 mb-4">
         Registro
       </h1>
       {% csrf_token %} {% for field in registro_form %}
@@ -33,9 +29,8 @@
 
       {% endfor %}
       <button
-        type="submit"
-        class="w-full text-center text-white mt-4 py-2 px-6 rounded-md shadow-md bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700"
-      >
+              type="submit"
+              class="w-full text-center text-white mt-4 py-2 px-6 rounded-md shadow-md bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700">
         Registrarse
       </button>
     </form>

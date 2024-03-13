@@ -70,6 +70,10 @@ module.exports = {
                     '900': '#3d3d3d',
                     '950': '#000000',
                 },
+                'black-darkmode':{
+                    '800':"#18181b",
+                    '950': '#0e0e11',
+                }
                 
             },
             fontFamily: {
