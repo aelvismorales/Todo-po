@@ -62,9 +62,8 @@ class CustomUserCreationForm(UserCreationForm):
                 password=self.cleaned_data["password1"],
             )
             return user
-        else:
-            # Me permite guarda rla instancia del usuario sin aun guardarlo en la base de datos, para despues realizar el user.save()
-            return super().save(commit=commit)
+        # Me permite guarda rla instancia del usuario sin aun guardarlo en la base de datos, para despues realizar el user.save()
+        return super().save(commit=commit)
 
 
 class LoginUserForm(forms.Form):

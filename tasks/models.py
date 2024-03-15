@@ -1,6 +1,7 @@
 """Modelos de la aplicación tasks"""
 
 from django.db import models
+from django.template.defaultfilters import date as date_filter
 
 
 # Create your models here.
@@ -30,6 +31,26 @@ class TaskList(models.Model):
             else 0
         )
         return total
+
+    def get_json(self, success_message=None, exist_one=False):
+        """Return the data of the task list in JSON format"""
+        json_data = {
+            "id": self.pk,
+            "name": self.name,
+            "description": self.description,
+            "created": date_filter(self.created, "F d, Y") if self.created else "",
+            "total_tasks": self.total_tasks(),
+            "completed_tasks": self.completed_tasks(),
+        }
+        if success_message:
+            json_data.update(
+                {
+                    "status": "success",
+                    "message": success_message,
+                    "exist_one": exist_one,
+                }
+            )
+        return json_data
 
 
 class Task(models.Model):
