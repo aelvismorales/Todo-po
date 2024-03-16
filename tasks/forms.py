@@ -93,7 +93,6 @@ class UpdateTaskListForm(forms.ModelForm):
     def save(self, commit=True):
         """Save the task list."""
         task_list = super(UpdateTaskListForm, self).save(commit=False)
-        print(task_list.name)
         if commit:
             task_list.save()
         return task_list
@@ -132,3 +131,16 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ["title", "description", "completed"]
+
+    # Limpieza de los datos
+    # Los datos que lleguen van a pasar por este proceso primero
+    def clean(self):
+        """Capitalize title and description."""
+        cleaned_data = super().clean()
+        title = cleaned_data.get("title")
+        description = cleaned_data.get("description")
+        if title:
+            cleaned_data["title"] = title.capitalize()
+        if description:
+            cleaned_data["description"] = description.capitalize()
+        return cleaned_data

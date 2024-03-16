@@ -65,7 +65,9 @@ def update_task_list(request, task_list_id):
     """Update a task list"""
     if request.method == "POST":
         task_list = TaskList.objects.get(id=task_list_id)
-        form = UpdateTaskListForm(request.POST, instance=task_list)
+        form = UpdateTaskListForm(
+            request.POST, instance=task_list
+        )  # Nos permite actualizar el objeto con los datos que vienen en el request por eso usamos el instance.
         if form.is_valid():
             updated_task_list = form.save(commit=False)
             updated_task_list.save()
@@ -153,3 +155,24 @@ def add_task_to_task_list(request, task_list_id):
             {"status": "error", "message": "No se pudo agregar la tarea."}
         )
     return JsonResponse({"status": "error", "message": "No se pudo agregar la tarea."})
+
+
+# TODO: Add login required decorator
+def view_tasks(request, task_list_id):
+    """View the tasks of a task list"""
+    task_list = TaskList.objects.get(id=task_list_id)
+    tasks = (
+        task_list.task_set.all()
+    )  # this will return all the tasks related to task_list.
+    if is_ajax(request):
+        tasks_data = [task.get_json() for task in tasks]
+        return JsonResponse({"tasks": tasks_data})
+    return render(
+        request,
+        "item_task/view_tasks.html",
+        {
+            "task_list": task_list,
+            "tasks": tasks,
+            "add_task_to_task_list_form": TaskForm(),
+        },
+    )

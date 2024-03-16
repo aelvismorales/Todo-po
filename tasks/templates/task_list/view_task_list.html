@@ -16,7 +16,9 @@
     <section id="task-list-container" class="px-4 dark:text-gray-100">
         {% if task_lists %}
         {% for task_list in task_lists %}
-        <article class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative" data-id={{task_list.id}} data-name="{{task_list.name}}"
+        <article id="task-list-item" class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative hover:scale-y-105 hover:cursor-pointer"
+                 data-id={{task_list.id}}
+                 data-name="{{task_list.name}}"
                  data-description="{{task_list.description}}">
             <div class="absolute w-1.5 top-0 bottom-0 left-0 bg-torch-red-600"></div>
             <div class="flex flex-col gap-2 sm:justify-between sm:flex-row sm:gap-0">
@@ -798,6 +800,19 @@
 
 
 
+
+</script>
+
+<!-- Script para abrir contenido de tareas de una task_list-->
+<script>
+    let articles = document.querySelectorAll('#task-list-item');
+
+    articles.forEach(article => {
+        article.addEventListener('click', (e) => {
+            const taskListId = e.currentTarget.getAttribute('data-id');
+            window.location.href = `/tasks/task_list/${taskListId}`;
+        })
+    })
 
 </script>
 

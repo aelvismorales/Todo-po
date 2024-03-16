@@ -1,0 +1,95 @@
+{% extends 'base_usuarios.html' %}
+{% block content %}
+<main class="w-screen h-screen bg-white dark:bg-black-ui-900 overflow-y-auto">
+    <section class="p-4 flex flex-col gap-2 sm:gap-0 sm:justify-between sm:flex-row sm:items-center">
+        <h1 class="font-sans font-semibold text-3xl">{{task_list.name}}</h1>
+        <button id="btn-crear-task" type="button"
+                class="font-inter text-center py-2 px-4 bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700 rounded-md w-32 sm-w-fit">
+            Crear Tarea
+        </button>
+    </section>
+    <!--Mensajes-->
+    <div id="message-loader">
+
+    </div>
+    <!--Seccion tareas-->
+    <section id="tasks-container" class="px-4">
+        {% if tasks %}
+        {% for task in tasks %}
+        <article class="w-full p-3 my-2 bg-torch-red-200 rounded-md relative">
+            <div class="absolute w-1.5 top-0 bottom-0 left-0 bg-torch-red-600"></div>
+            <div class="flex justify-between">
+                <header>
+                    <h1 id="h_task_{{task.id}}" class="text-torch-red-950 text-base">{{task.title}}</h1>
+                    <p id="p_task_created_{{task.id}}" class="text-torch-red-900 text-xs"><strong>Created: </strong> {{task.created|date:'F d, Y'}}
+                    </p>
+                    {% if task.completed %}
+                    <p id="p_task_completed_{{task.id}}" class="flex items-center py-0.5 gap-1 text-sm">
+                        <strong>Completed: </strong>
+                        <svg class="w-6 h-6 text-green-500" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                  d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z"
+                                  clip-rule="evenodd" />
+                        </svg>
+
+                    </p>
+                    {% else %}
+                    <p id="p_task_completed_{{task.id}}" class="flex items-center py-0.5 gap-1 text-sm">
+                        <strong>Completed: </strong>
+                        <svg class="w-6 h-6 text-gray-80" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                             viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z" />
+                        </svg>
+
+                    </p>
+                    {% endif %}
+
+                </header>
+                <!--Botones para actualizar y eliminar una tarea-->
+                <section class="flex items-center gap-2">
+                    <button id="btn-update-task" class="font-inter px-2 py-1 bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800 hover:text-sky-500 active:text-sky-600 dark:hover:text-sky-500 dark:active:text-sky-600"
+                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
+                        </svg>
+                    </button>
+                    <button id="btn-delete-task" class="font-inter px-2 py-1 bg-transparent hover:scale-125">
+                        <svg class="w-6 h-6 text-gray-800  hover:text-torch-red-500 active:text-torch-red-600 dark:hover:text-torch-red-500 dark:hover:active:text-torch-red-600"
+                             aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                        </svg>
+
+                    </button>
+                </section>
+            </div>
+            <!--Descripcion de la task-->
+            <section class="py-1">
+                <p id="p_task_description_{{task.id}}" class="text-gray-700 py-2 border-t-2 border-torch-red-400 text-sm">{{task.description}}</p>
+            </section>
+        </article>
+        {% endfor %}
+        {% else %}
+        <article class="w-full p-3 my-2 relative flex justify-center items-center bg-torch-red-200 rounded-lg">
+            <p>There is not task availabe, add a new one </p>
+            <button id="btn-create-not-task" type="button"
+                    class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125">
+                <svg class="w-6 h-6 text-gray-800  hover:text-green-500 active:text-green-600 dark:hover:text-green-500 dark:active:text-green-600"
+                     aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg" width="24"
+                     height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6" />
+                </svg>
+            </button>
+        </article>
+        {% endif %}
+    </section>
+
+</main>
+{% endblock %}

@@ -67,3 +67,18 @@ class Task(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def get_json(self, success_message=None):
+        """Return the data of the task in JSON format"""
+        json_data = {
+            "id": self.pk,
+            "title": self.title,
+            "description": self.description,
+            "completed": self.completed,
+            "created": date_filter(self.created, "F d, Y") if self.created else "",
+            "task_list_id": self.task_list.pk,
+            "task_list": self.task_list.name,
+        }
+        if success_message:
+            json_data.update({"status": "success", "message": success_message})
+        return json_data
