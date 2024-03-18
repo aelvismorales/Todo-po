@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.db.models import Count
 
 # from django.contrib import messages
-from .forms import CreateTaskListForm, UpdateTaskListForm, TaskForm
-from .models import TaskList
+from .forms import CreateTaskListForm, UpdateTaskForm, UpdateTaskListForm, TaskForm
+from .models import TaskList, Task
 
 # Create your views here.
 
@@ -136,7 +136,8 @@ def delete_task_list(request, task_list_id):
 
 
 # TODO: Add login required decorator
-def add_task_to_task_list(request, task_list_id):
+# * PASS
+def add_task_to_task_list(request, task_list_id):  # Create a new task
     """Add a new task to a task list"""
     if request.method == "POST":
         task_list = TaskList.objects.get(id=task_list_id)
@@ -149,6 +150,7 @@ def add_task_to_task_list(request, task_list_id):
                 {
                     "status": "success",
                     "message": "Tarea agregada con éxito.",
+                    "task": new_task.get_json(),
                 }
             )
         return JsonResponse(
@@ -158,6 +160,7 @@ def add_task_to_task_list(request, task_list_id):
 
 
 # TODO: Add login required decorator
+# * PASS
 def view_tasks(request, task_list_id):
     """View the tasks of a task list"""
     task_list = TaskList.objects.get(id=task_list_id)
@@ -174,5 +177,63 @@ def view_tasks(request, task_list_id):
             "task_list": task_list,
             "tasks": tasks,
             "add_task_to_task_list_form": TaskForm(),
+            "update_task_form": UpdateTaskForm(),
         },
+    )
+
+
+# TODO: Add login required decorator
+# * PASS
+def update_task(request, task_id):
+    """Update a task"""
+    if request.method == "POST":
+        task = Task.objects.get(id=task_id)
+        form = UpdateTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            updated_task = form.save(commit=False)
+            updated_task.save()
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "message": "Tarea actualizada con éxito.",
+                    "task": updated_task.get_json(),
+                }
+            )
+        return JsonResponse(
+            {"status": "error", "message": "No se pudo actualizar la tarea."}
+        )
+    if request.method == "GET":
+        task = Task.objects.get(id=task_id)
+        return JsonResponse({"task": task.get_json()})
+    return JsonResponse(
+        {"status": "error", "message": "No se pudo actualizar la tarea."}
+    )
+
+
+# TODO : Add login required decorator
+# * PASS
+def delete_task(request, task_id):
+    """Delete a task"""
+    if request.method == "DELETE":
+        try:
+            task = Task.objects.get(id=task_id)
+            task.delete()
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "message": "Tarea eliminada con éxito.",
+                }
+            )
+        except Task.DoesNotExist:
+            return JsonResponse(
+                {
+                    "status": "error",
+                    "message": "No se pudo eliminar la tarea, no existe.",
+                }
+            )
+    return JsonResponse(
+        {
+            "status": "error",
+            "message": "No se pudo eliminar la tarea, el metodo no es DELETE.",
+        }
     )

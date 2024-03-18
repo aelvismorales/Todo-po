@@ -144,3 +144,43 @@ class TaskForm(forms.ModelForm):
         if description:
             cleaned_data["description"] = description.capitalize()
         return cleaned_data
+
+
+class UpdateTaskForm(forms.ModelForm):
+    """Form for the Task model."""
+
+    class Meta:
+        model = Task
+        fields = ["title", "description", "completed"]
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateTaskForm, self).__init__(*args, **kwargs)
+        self.fields["title"].widget.attrs[
+            "class"
+        ] = "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:ring-torch-red-300  dark:focus:ring-torch-red-400"
+        self.fields["description"].widget.attrs[
+            "class"
+        ] = "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:outline-none focus:ring-torch-red-300 dark:focus:ring-torch-red-400"
+        self.fields["completed"].widget.attrs[
+            "class"
+        ] = "w-6 h-6 text-torch-red-600 border-gray-300 rounded-md focus:ring-torch-red-300 dark:focus:ring-torch-red-400"
+
+    # Limpieza de los datos
+    # Los datos que lleguen van a pasar por este proceso primero
+    def clean(self):
+        """Capitalize title and description."""
+        cleaned_data = super().clean()
+        title = cleaned_data.get("title")
+        description = cleaned_data.get("description")
+        if title:
+            cleaned_data["title"] = title.capitalize()
+        if description:
+            cleaned_data["description"] = description.capitalize()
+        return cleaned_data
+
+    def save(self, commit=True):
+        """Save the task."""
+        task = super(UpdateTaskForm, self).save(commit=False)
+        if commit:
+            task.save()
+        return task

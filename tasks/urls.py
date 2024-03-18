@@ -28,4 +28,5 @@ urlpatterns = [
         name="add_task_to_task_list",
     ),
     path("task_list/<int:task_list_id>/", views.view_tasks, name="tasks"),
+    path("task_list/task/update/<int:task_id>/", views.update_task, name="update_task"),
 ]
