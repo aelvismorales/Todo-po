@@ -29,4 +29,5 @@ urlpatterns = [
     ),
     path("task_list/<int:task_list_id>/", views.view_tasks, name="tasks"),
     path("task_list/task/update/<int:task_id>/", views.update_task, name="update_task"),
+    path("task_list/task/delete/<int:task_id>/", views.delete_task, name="delete_task"),
 ]
