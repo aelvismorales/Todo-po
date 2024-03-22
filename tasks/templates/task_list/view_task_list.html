@@ -18,7 +18,7 @@
         {% if task_lists %}
         {% for task_list in task_lists %}
         <article id="task_list_item_{{ task_list.id }}"
-                 class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative hover:scale-y-105 hover:cursor-pointer"
+                 class="w-full p-3 my-2 bg-torch-red-200 rounded-lg relative hover:scale-y-105 hover:cursor-pointer task_list_item"
                  data-id={{task_list.id}}
                  data-name="{{task_list.name}}"
                  data-description="{{task_list.description}}">
@@ -35,7 +35,7 @@
                 </header>
                 <!--Buttons to create new task inside or delete the list itself-->
                 <section class="flex items-center gap-1">
-                    <button id="btn-add-new-task" type="button"
+                    <button id="btn_add_task_to_task_list" type="button"
                             class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125" data-id={{task_list.id}}>
                         <svg class="w-6 h-6 text-gray-800  hover:text-green-500 active:text-green-600 dark:hover:text-green-500 dark:active:text-green-600"
                              aria-hidden="true"
@@ -230,7 +230,7 @@
 </div>
 
 <!-- Modal add new task to task_list-->
-<div id="add_task_to_task_list-modal" tabindex="-1" aria-hidden="true"
+<div id="modal_add_task_to_task_list" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40">
     <div class="p-4 w-full max-w-2xl max-h-full mx-auto">
         <!--Modal content-->
@@ -238,7 +238,7 @@
             <!--Modal Header-->
             <div class="flex items-center justify-between p-4 sm:p-5 border-b rounded-t dark:border-gray-600">
                 <h1 class="text-xl font-bold text-gray-900 dark:text-white">New Task</h1>
-                <button id="btn-add-task-close-svg" type="button"
+                <button id="close_modal_add_task_to_task_list_svg" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         data-modal-hide="default-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -248,9 +248,12 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
+            <div id="message_loader_form_add_task_to_task_list">
+
+            </div>
             <!-- Modal body-->
             <div class="p-4 sm:p-5 space-y-4">
-                <form method="post" id="add_task_to_task_list_form">
+                <form method="post" id="form_add_task_to_task_list">
                     {% csrf_token %}
                     {% for field in add_task_to_task_list_form %}
                     <label for="{{field.id_for_label}}" class="block mb-2">
@@ -267,10 +270,10 @@
                     {% endfor %}
                     <!--Modal Footer-->
                     <div class="flex items-center p-4 sm:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button id="btn-add-task-save" type="button"
+                        <button id="save_task_to_task_list_button" type="button"
                                 class="text-white bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700 focus:ring-4 focus:outline-none focus:ring-torch-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-torch-red-500 dark:hover:bg-torch-red-600 dark:active:bg-torch-red-700">Save</button>
 
-                        <button id="btn-add-task-footer-close" type="button"
+                        <button id="close_modal_add_task_to_task_list_footer_btn" type="button"
                                 class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-torch-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
                     </div>
                 </form>
@@ -322,109 +325,21 @@
 </script>
 
 <!-- Script abrir modal update_task_list-->
-<script type="module" src="{% static 'js/modal_update_task_list.js' %}"></script>
+<script type="module" src="{% static 'js/modal_update_task_list.js' %}">
+</script>
 
 
 <!-- Script abrir modal eliminar_task_list-->
-<script type="module" src="{% static 'js/modal_delete_task_list.js' %}"></script>
-
-<script>
-    // Funcion para ocultar(cerrar) el modal update
-    function hide_modal(modal) {
-        modal.classList.remove('block');
-        modal.classList.add('hidden');
-        modal.setAttribute('aria-hidden', 'true');
-    }
-    // Funcion para mostrar mensaje de exito o error
-    function handleError(message, btn) {
-        show_message(message, 'error');
-        console.log('Error:', message);
-        btn.disabled = false;
-    }
-
+<script type="module" src="{% static 'js/modal_delete_task_list.js' %}">
 </script>
 
+
 <!--Script abrir modal add_task_to_task_list-->
-<script>
-    // Obteniendo todos boton add_new_task
-
-    let btn_add_new_task = document.querySelectorAll('#btn-add-new-task');
-    if (btn_add_new_task) {
-        btn_add_new_task.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                modal_add_task_to_task_list.classList.remove('hidden');
-                modal_add_task_to_task_list.classList.add('block');
-                modal_add_task_to_task_list.setAttribute('aria-hidden', 'false');
-                addTaskToTaskList(e);
-            });
-        });
-    }
-
-    // Obteniendo modal add_task_to_task_list
-    const modal_add_task_to_task_list = document.getElementById('add_task_to_task_list-modal');
-    const modal_add_task_to_task_list_close_svg = document.getElementById('btn-add-task-close-svg');
-    const modal_add_task_to_task_list_close_btn = document.getElementById('btn-add-task-footer-close');
-
-    // Agregando eventlistener para cerrar el modal add_task_to_task_list
-    modal_add_task_to_task_list.addEventListener('click', (e) => {
-        if (e.target === modal_add_task_to_task_list || e.target === modal_add_task_to_task_list_close_btn || e.target === modal_add_task_to_task_list_close_svg) {
-            hide_modal(modal_add_task_to_task_list);
-        }
-    });
-
-    // Obteniendo el boton de guardar del modal add_task_to_task_list
-    const add_task_save_button = document.getElementById('btn-add-task-save');
-    // Obtener id del boton, modificar action formulario y luego onclick Enviar
-
-
-
-    function addTaskToTaskList(event) {
-        const taskListId = event.currentTarget.getAttribute('data-id');
-        const form = document.getElementById('add_task_to_task_list_form');
-        form.action = `/tasks/add_task_to_task_list/${taskListId}`;
-        add_task_save_button.onclick = function (e) {
-            e.preventDefault();
-            // Deshabilitar el botón mientras se procesa la solicitud
-            add_task_save_button.disabled = true;
-            fetch(form.action + '/', {
-                method: 'POST',
-                body: new FormData(form),
-                headers: {
-                    'X-CSRFToken': '{{csrf_token}}'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    hide_modal(modal_add_task_to_task_list);
-                    form.reset();
-                    window.location.reload();
-                    //show_message('Task Added', 'success');
-                } else {
-                    handleError('Error adding Task', add_task_save_button);
-                }
-                // Habilitar el botón después de que se complete la solicitud
-                add_task_save_button.disabled = false;
-            }).catch(error => {
-                handleError('Error adding Task', add_task_save_button);
-            });
-        };
-    }
-
-
-
-
+<script type="module" src="{% static 'js/modal_add_task_to_task_list.js' %}">
 </script>
 
 <!-- Script para abrir contenido de tareas de una task_list-->
-<!--<script>
-    let articles = document.querySelectorAll('#task-list-item');
-
-    articles.forEach(article => {
-        article.addEventListener('click', (e) => {
-            const taskListId = e.currentTarget.getAttribute('data-id');
-            window.location.href = `/tasks/task_list/${taskListId}`;
-        })
-    })
-
-</script>-->
+<script src="{% static 'js/redirection_articles.js' %}">
+</script>
 
 {% endblock %}
