@@ -31,7 +31,7 @@ def view_task_list(request):
         {
             "task_lists": task_list,
             "create_task_list_form": CreateTaskListForm(),
-            "update_task_list_form": UpdateTaskListForm(),
+            "form_update_task_list": UpdateTaskListForm(),
             "add_task_to_task_list_form": TaskForm(),
         },
     )
@@ -75,6 +75,7 @@ def update_task_list(request, task_list_id):
             {
                 "status": "success",
                 "message": "Lista de tareas actualizada con éxito.",
+                "task_list": updated_task_list.get_json(),
             }
         )
 

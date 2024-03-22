@@ -135,32 +135,7 @@
   {% block content %}
   {% endblock %}
 </body>
-<script>
-  const darkmode = document.getElementById("darkmode");
-  darkmode.addEventListener("change", () => {
-    document.body.classList.toggle("dark");
-  });
-
-  // Method to remove the alert div
-  const closseButton = document.querySelector("[data-dismiss-target]");
-  const alertdiv = document.getElementById("alert-3");
-  const alertdiv2 = document.getElementById("alert-2");
-  const alertdiv4 = document.getElementById("alert-4");
-  if (closseButton) {
-    closseButton.addEventListener("click", () => {
-      if (alertdiv) {
-        alertdiv.remove();
-      }
-      if (alertdiv2) {
-        alertdiv2.remove();
-      }
-      if (alertdiv4) {
-        alertdiv4.remove();
-      }
-    });
-  }
-
-</script>
+<script src="{% static 'js/darkmode_remove_messages.js' %}"></script>
 {% block scripts %}
 {% endblock %}
 
