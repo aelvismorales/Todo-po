@@ -283,42 +283,9 @@
     </div>
 </div>
 
-
 {% endblock %}
 
 {% block scripts %}
-<!-- Script para poner un maximo de palabra visible-->
-<!--<script>
-    let descriptionLists = document.querySelectorAll('#description-list');
-
-    function truncateDescription() {
-        descriptionLists.forEach((descriptionList) => {
-            // Check if the full text is already stored
-            if (!descriptionList.getAttribute('data-full-text')) {
-                descriptionList.setAttribute('data-full-text', descriptionList.innerText);
-            }
-
-            let description = descriptionList.getAttribute('data-full-text');
-            let maxLength;
-            if (window.innerWidth <= 640) {
-                maxLength = 150;
-            } else {
-                maxLength = 250;
-            }
-
-            let shortDescription = description.substring(0, maxLength);
-
-            if (description.length > maxLength) {
-                descriptionList.innerText = shortDescription + '...';
-            }
-        });
-    }
-    // Call the function once when the page loads
-    truncateDescription();
-
-    // Call the function again whenever the window is resized
-    window.addEventListener('resize', truncateDescription);
-</script>-->
 
 <!--Script abrir modal crear_task_list-->
 <script type="module" src="{% static 'js/modal_create_task_list.js' %}">

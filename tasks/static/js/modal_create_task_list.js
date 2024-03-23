@@ -67,75 +67,80 @@ const modal_close_footer_btn = document.getElementById(
 );
 
 // Open modal
-btn_crear_task_list.addEventListener("click", (e) => {
-  e.stopPropagation();
-  open_modal(modal_crear_task_list);
-});
+if (btn_crear_task_list) {
+  btn_crear_task_list.addEventListener("click", (e) => {
+    e.stopPropagation();
+    open_modal(modal_crear_task_list);
+  });
+}
 
 // Close modal
-modal_crear_task_list.addEventListener("click", (e) => {
-  if (
-    e.target === modal_crear_task_list ||
-    e.target === modal_close_svg ||
-    e.target === modal_close_footer_btn
-  ) {
-    close_modal(modal_crear_task_list);
-  }
-});
-
+if (modal_crear_task_list) {
+  modal_crear_task_list.addEventListener("click", (e) => {
+    if (
+      e.target === modal_crear_task_list ||
+      e.target === modal_close_svg ||
+      e.target === modal_close_footer_btn
+    ) {
+      close_modal(modal_crear_task_list);
+    }
+  });
+}
 // Send form data using fetch
 const save_button = document.getElementById("save_button");
 
-save_button.addEventListener("click", async (e) => {
-  // Getting form data
-  const form = document.getElementById("form_crear_task_list");
-  const formData = new FormData(form);
-  const message_loader_form = document.getElementById(
-    "message_loader_crear_modal"
-  );
-  // Prevent default form submit
-  e.preventDefault();
-  // Disable button to avoid multiple clicks
-  save_button.disabled = true;
+if (save_button) {
+  save_button.addEventListener("click", async (e) => {
+    // Getting form data
+    const form = document.getElementById("form_crear_task_list");
+    const formData = new FormData(form);
+    const message_loader_form = document.getElementById(
+      "message_loader_crear_modal"
+    );
+    // Prevent default form submit
+    e.preventDefault();
+    // Disable button to avoid multiple clicks
+    save_button.disabled = true;
 
-  // Check if the form is not empty
-  if (formData.get("name") === "" || formData.get("description") === "") {
-    show_message(message_loader_form, "Fields cannot be empty", "error");
-    save_button.disabled = false;
-    return;
-  }
-  // Save a flag in localStorage to show the message
-  localStorage.setItem("show_message", false);
-
-  // Fetch form data using async/await
-  try {
-    const response = await fetch(form.action, {
-      method: "POST",
-      body: formData,
-      headers: {
-        "X-CSRFToken": "{{csrftoken}}",
-      },
-    });
-    if (response.ok) {
-      show_message(
-        message_loader_form,
-        "Task list created successfully",
-        "sucess"
-      );
-      close_modal(modal_crear_task_list);
+    // Check if the form is not empty
+    if (formData.get("name") === "" || formData.get("description") === "") {
+      show_message(message_loader_form, "Fields cannot be empty", "error");
       save_button.disabled = false;
-      form.reset();
-      localStorage.setItem("show_message", true);
-      window.location.reload();
-    } else {
-      show_message(message_loader_form, "An error occurred", "error");
+      return;
+    }
+    // Save a flag in localStorage to show the message
+    localStorage.setItem("show_message", false);
+
+    // Fetch form data using async/await
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-CSRFToken": "{{csrftoken}}",
+        },
+      });
+      if (response.ok) {
+        show_message(
+          message_loader_form,
+          "Task list created successfully",
+          "sucess"
+        );
+        close_modal(modal_crear_task_list);
+        save_button.disabled = false;
+        form.reset();
+        localStorage.setItem("show_message", true);
+        window.location.reload();
+      } else {
+        show_message(message_loader_form, "An error occurred", "error");
+        save_button.disabled = false;
+      }
+    } catch (error) {
+      show_message(message_loader_form, `An eror occurred ${error}`, "error");
       save_button.disabled = false;
     }
-  } catch (error) {
-    show_message(message_loader_form, `An eror occurred ${error}`, "error");
-    save_button.disabled = false;
-  }
-});
+  });
+}
 
 // * Check if the message should be shown
 document.addEventListener("DOMContentLoaded", () => {
