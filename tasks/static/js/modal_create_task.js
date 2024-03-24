@@ -78,11 +78,14 @@ modal_crear_task.addEventListener("click", (e) => {
 });
 
 // Show message when page is reloaded
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded and parsed");
   const show_message_flag = localStorage.getItem("show_message");
   const message_loader = document.getElementById("message_loader");
+  console.log(show_message_flag);
   if (show_message_flag) {
     show_message(message_loader, "Task created successfully", "success");
-    sessionStorage.removeItem("show_message");
+    localStorage.removeItem("show_message");
   }
 });
+*/

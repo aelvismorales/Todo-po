@@ -57,7 +57,6 @@ delete_save_task_list_button.addEventListener("click", async (e) => {
   try {
     const response = await fetch(`/tasks/delete_task_list/${id_task_list}/`, {
       method: "DELETE",
-      body: JSON.stringify({ id: id_task_list }),
       headers: {
         "X-CSRFToken": csrftoken,
       },
@@ -65,18 +64,15 @@ delete_save_task_list_button.addEventListener("click", async (e) => {
 
     const data = await response.json();
     if (data.status === "success") {
-      // reload the page
-      localStorage.setItem("show_message", true);
-      window.location.reload();
+      // Removing the task list from the UI
+      // Close modal
+      close_modal(modal_delete_task_list);
+      // Show message
+      show_message(message_loader, "Task list deleted successfully", SUCCESS);
+      // Remove task list from the UI
+      remove_task_list_ui(id_task_list);
+      delete_save_task_list_button.disabled = false;
     }
-    // Removing the task list from the UI
-    // Close modal
-    close_modal(modal_delete_task_list);
-    // Show message
-    show_message(message_loader, "Task list deleted successfully", SUCCESS);
-    // Remove task list from the UI
-    remove_task_list_ui(id_task_list);
-    delete_save_task_list_button.disabled = false;
   } catch (error) {
     show_message(message_loader_delete, `An error occurred ${error}`, ERROR);
     delete_save_task_list_button.disabled = false;
@@ -101,14 +97,4 @@ modal_delete_task_list.addEventListener("click", (e) => {
   ) {
     close_modal(modal_delete_task_list);
   }
-
-  // Showing message if the page is reload
-  document.addEventListener("DOMContentLoaded", () => {
-    const show_message = localStorage.getItem("show_message");
-    if (show_message === "true") {
-      const message_loader = document.getElementById("message_loader");
-      show_message(message_loader, "Task list deleted successfully", SUCCESS);
-      localStorage.setItem("show_message", false);
-    }
-  });
 });

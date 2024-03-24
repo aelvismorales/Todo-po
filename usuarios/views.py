@@ -33,6 +33,8 @@ def registro(request):
 def login_usuario(request):
     """Render la pagina de login"""
     if request.method == "GET":
+        if request.user.is_authenticated:
+            return redirect("task_list")
         return render(request, "login.html", {"login_form": LoginUserForm()})
     if request.method == "POST":
         form = LoginUserForm(request.POST)
@@ -42,7 +44,7 @@ def login_usuario(request):
             if user.check_password(form.cleaned_data["password"]):
                 login(request, user)
                 messages.success(request, "Usuario logueado con éxito.")
-                return redirect("usuarios")
+                return redirect("task_list")
             return render(
                 request,
                 "login.html",

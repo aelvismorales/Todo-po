@@ -1,9 +1,9 @@
 {% extends 'base_usuarios.html' %}
 {% load static %}
 {% block content %}
-<main class="w-screen h-screen bg-white dark:bg-black-ui-900 overflow-y-auto">
+<main class="w-screen h-screen bg-white dark:bg-black-ui-800 overflow-y-auto">
     <section class="p-4 flex flex-col gap-2 sm:gap-0 sm:justify-between sm:flex-row sm:items-center">
-        <h1 class="font-sans font-semibold text-3xl">{{task_list.name}}</h1>
+        <h1 class="font-sans font-semibold text-3xl dark:text-white">{{task_list.name}}</h1>
         <button id="btn_crear_task" type="button"
                 class="font-inter text-center py-2 px-4 bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700 rounded-md w-32 sm-w-fit">
             Crear Tarea
@@ -93,7 +93,9 @@
         {% endif %}
     </section>
 </main>
+{% endblock %}
 
+{% block modals %}
 <!-- Modal to create new task-->
 <div id="modal_crear_task" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40">

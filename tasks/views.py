@@ -171,6 +171,7 @@ def view_tasks(request, task_list_id):
     if is_ajax(request):
         tasks_data = [task.get_json() for task in tasks]
         return JsonResponse({"tasks": tasks_data})
+
     return render(
         request,
         "item_task/view_tasks.html",

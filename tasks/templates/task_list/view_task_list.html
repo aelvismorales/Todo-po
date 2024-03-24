@@ -1,8 +1,8 @@
 {% extends 'base_usuarios.html' %}
 {% load static %}
 {% block content %}
-<main class="w-screen h-screen bg-white dark:bg-black-ui-900 overflow-y-auto">
-    <section class="p-4 flex flex-col gap-2 sm:gap-0 sm:justify-between sm:flex-row text-black dark:text-white">
+<main class="w-screen h-screen bg-white dark:bg-black-ui-800 overflow-y-auto">
+    <section class="p-4 flex flex-col gap-2 sm:gap-0 sm:justify-between sm:flex-row text-black dark:text-gray-50">
         <h1 class="font-sans font-semibold text-3xl ">Lista de Tareas</h1>
         <button id="btn_crear_task_list" type="button"
                 class=" font-inter font-normal text-center py-2 px-4 rounded-md bg-torch-red-500 hover:bg-torch-red-600 active:bg-torch-red-700 w-32 sm:w-fit">Crear
@@ -12,7 +12,6 @@
     <div id="message_loader">
 
     </div>
-
 
     <section id="task-list-container" class="px-4 dark:text-gray-100">
         {% if task_lists %}
@@ -36,7 +35,8 @@
                 <!--Buttons to create new task inside or delete the list itself-->
                 <section class="flex items-center gap-1">
                     <button id="btn_add_task_to_task_list" type="button"
-                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125" data-id={{task_list.id}}>
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125"
+                            data-id={{task_list.id}}>
                         <svg class="w-6 h-6 text-gray-800  hover:text-green-500 active:text-green-600 dark:hover:text-green-500 dark:active:text-green-600"
                              aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24"
@@ -46,7 +46,8 @@
                         </svg>
                     </button>
                     <button id="btn_update_task_list" type="button"
-                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125" data-id={{task_list.id}}>
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125"
+                            data-id={{task_list.id}}>
                         <svg class="w-6 h-6 text-gray-800 hover:text-sky-500 active:text-sky-600 dark:hover:text-sky-500 dark:active:text-sky-600"
                              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" fill="none" viewBox="0 0 24 24">
@@ -56,7 +57,8 @@
 
                     </button>
                     <button id="btn_delete_task_list" type="button"
-                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125" data-id={{task_list.id}}>
+                            class="font-inter font-normal text-center px-2 py-1 rounded-md bg-transparent hover:scale-125"
+                            data-id={{task_list.id}}>
                         <svg class="w-6 h-6 text-gray-800  hover:text-torch-red-500 active:text-torch-red-600 dark:hover:text-torch-red-500 dark:hover:active:text-torch-red-600"
                              aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24"
@@ -92,6 +94,10 @@
         {% endif %}
     </section>
 </main>
+{% endblock %}
+
+
+{% block modals %}
 <!--Modal create Task_List-->
 <div id="modal_crear_task_list" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-40">

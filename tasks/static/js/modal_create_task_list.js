@@ -1,4 +1,8 @@
 // Desc: Modal to create a task list
+// Constants
+const SUCCESS = "success";
+const ERROR = "error";
+//const WARNING = 'warning';
 // * Function to open and close modals
 export function open_modal(modal) {
   modal.classList.remove("hidden");
@@ -38,10 +42,6 @@ export function show_message(message_loader, message, type) {
     message_loader.removeChild(div);
   }, 2000);
 }
-// Constants
-const SUCCESS = "success";
-const ERROR = "error";
-//const WARNING = 'warning';
 
 function create_div_alert(id, className, message) {
   const div = document.createElement("div");
@@ -145,14 +145,10 @@ if (save_button) {
 // * Check if the message should be shown
 document.addEventListener("DOMContentLoaded", () => {
   const show_message_flag = localStorage.getItem("show_message");
-  const message_loader_form = document.getElementById("message_loader");
+  const message_loader = document.getElementById("message_loader");
 
   if (show_message_flag === "true") {
-    show_message(
-      message_loader_form,
-      "Task list created successfully",
-      "sucess"
-    );
+    show_message(message_loader, "Task list created successfully", SUCCESS);
     localStorage.setItem("show_message", false);
   }
 });
